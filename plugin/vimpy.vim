@@ -45,6 +45,5 @@ for filename in os.listdir(bundle_dir):
         if os.path.isdir(module_abspath):
             sys.path = [abs_filename] + sys.path
             importlib.import_module(module_dirname)
-            sys.path = sys.path[1:]
 EOF
 
