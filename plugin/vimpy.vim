@@ -21,6 +21,8 @@ bundle_dir = os.path.dirname(vimpy_dir)
 # Make sure that the user is using pathogen before continuing
 pathogen_check = vim.eval('g:loaded_pathogen')
 
+import_modules = []
+
 if not pathogen_check:
     message = open(os.path.join(docs_dir, 'pathogen_required.md'), 'r')
     print("{0}\n".format(message.read()))
@@ -44,6 +46,10 @@ for filename in os.listdir(bundle_dir):
 
         if os.path.isdir(module_abspath):
             sys.path = [abs_filename] + sys.path
-            importlib.import_module(module_dirname)
+            import_modules.append(module_dirname)
+
+for module in import_modules:
+	importlib.import_module(module)
+
 EOF
 
