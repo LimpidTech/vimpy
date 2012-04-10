@@ -9,11 +9,12 @@ python << EOF
 import sys
 import os
 import vim
+import importlib
 
 vimpy_script_filename = vim.eval('s:vimpy_script_filename')
 
 # Get our different directories
-vimpy_dir = os.path.dirname(os.path.dirname(vimpy_script_filename))
+vimpy_dir = os.path.abspath(os.path.dirname(os.path.dirname(vimpy_script_filename)))
 docs_dir = os.path.join(vimpy_dir, 'docs')
 bundle_dir = os.path.dirname(vimpy_dir)
 
@@ -31,10 +32,19 @@ if not pathogen_check:
 # Loop through every app in our pathogen bundle, and expose it's
 # plugin directory to Python.
 for filename in os.listdir(bundle_dir):
-    abs_filename = os.path.join(bundle_dir, filename)
-    abs_pathname = os.path.join(abs_filename, 'plugin')
+    if filename[0] == '.':
+        continue
 
-    if os.path.isdir(abs_pathname):
-        sys.path = [abs_pathname] + sys.path
+    abs_filename = os.path.join(bundle_dir, filename)
+
+    if os.path.isdir(abs_filename):
+        # TODO: Modify this to make real python names
+        module_dirname = os.path.basename(abs_filename).lower()
+        module_abspath = os.path.join(abs_filename, module_dirname)
+
+        if os.path.isdir(module_abspath):
+            sys.path = [abs_filename] + sys.path
+            importlib.import_module(module_dirname)
+            sys.path = sys.path[1:]
 EOF
 
