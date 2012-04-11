@@ -1,8 +1,5 @@
 if !has('python')
-  echohl ErrorMsg
-  echomsg "Vimpy requires that Vim is compiled with +python. It will not be used."
-  echohl NONE
-
+  echoerr "Vimpy requires that Vim is compiled with +python. It will not be used."
   finish
 endif
 
