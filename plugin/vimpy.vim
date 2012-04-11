@@ -1,3 +1,11 @@
+if !has('python')
+  echohl ErrorMsg
+  echomsg "Vimpy requires that Vim is compiled with +python. It will not be used."
+  echohl NONE
+
+  finish
+endif
+
 if exists("g:loaded_vimpy") || &cp
   finish
 endif
