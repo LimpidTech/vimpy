@@ -11,6 +11,11 @@ def call_observers(event_name):
 vim.command("python from vimpy.plugins import call_observers")
 
 for command in autocommands_map:
+    # Automating Cmd-Events is bad news. These must instead
+    # be bound manually by the plugin.
+    if autocommands_map[command][-3:] == 'Cmd':
+        continue
+
     au_command = 'autocmd {0} * :python call_observers("{0}");'.format(autocommands_map[command])
     vim.command(au_command)
 
