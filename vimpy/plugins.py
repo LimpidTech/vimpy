@@ -2,20 +2,20 @@ import vim
 from .autocommands import autocommands_map
 
 # TODO: Make this more cleanly
-observors = []
+observers = []
 
-def call_observors(event_name):
-    for observor in observors:
-        observor.emit(event_name)
+def call_observers(event_name):
+    for observer in observers:
+        observer.emit(event_name)
 
-vim.command("python from vimpy.plugins import call_observors")
+vim.command("python from vimpy.plugins import call_observers")
 
 for command in autocommands_map:
-    au_command = 'autocmd {0} * :python call_observors("{0}");'.format(autocommands_map[command])
+    au_command = 'autocmd {0} * :python call_observers("{0}");'.format(autocommands_map[command])
     vim.command(au_command)
 
-class PluginObservor(object):
-    """ Provides a centralized observor for propagating Vim autocommands.
+class PluginObserver(object):
+    """ Provides a centralized observer for propagating Vim autocommands.
 
     Directly listens to Vim events and propagates them as required through
     any event listeners that register themselves with this object and provide
@@ -38,7 +38,7 @@ class PluginObservor(object):
         for event in autocommands_map:
             self.listeners[event] = []
 
-        observors.append(self)
+        observers.append(self)
 
     def create_emitter(self, event_name):
         """ Returns an emitter that will trigger event_name on listeners. """
@@ -90,16 +90,16 @@ class Plugin(object):
 
     auto_register = True
 
-    def __init__(self, observor=None): 
-        """ Sets up our plugin observor and registers to it if necessary. """
+    def __init__(self, observer=None): 
+        """ Sets up our plugin observer and registers to it if necessary. """
 
-        if observor is None:
-            observor = default_observor
+        if observer is None:
+            observer = default_observer
 
-        # Automatically register this object with the observor if necessary.
+        # Automatically register this object with the observer if necessary.
         if self.auto_register is True:
-            observor.register(self)
+            observer.register(self)
 
-# Instantiate a default observor for plugins that don't provide it explicitly
-default_observor = PluginObservor()
+# Instantiate a default observer for plugins that don't provide it explicitly
+default_observer = PluginObserver()
 
