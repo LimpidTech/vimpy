@@ -6,10 +6,12 @@ observors = []
 
 def call_observors(event_name):
     for observor in observors:
-      observor.emit(event_name)
+        observor.emit(event_name)
+
+vim.command("python from vimpy.plugins import call_observors")
 
 for command in autocommands_map:
-    au_command = 'au {0} * :python from vimpy.plugins import call_observors; call_observors("{0}");'.format(autocommands_map[command])
+    au_command = 'autocmd {0} * :python call_observors("{0}");'.format(autocommands_map[command])
     vim.command(au_command)
 
 class PluginObservor(object):
