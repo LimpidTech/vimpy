@@ -22,11 +22,11 @@ class VimpySettings(object):
         """ Modifies the value of the provided variable. """
 
         # Attempt to escape provided values to be safely provided to vim
-        final_value = '{0}'.format(value)
+        final_value = str(value)
         final_value = final_value.replace('\\', '\\\\')
-        final_value = final_value.replace('"', '\"')
+        final_value = final_value.replace('"', '\\"')
 
-        vim.command(vim_setter_command.format(key, value))
+        vim.command(vim_setter_command.format(key, final_value))
 
 settings = VimpySettings()
 
