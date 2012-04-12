@@ -29,7 +29,10 @@ autocommands_map = {
     'post_file_changed_shell': 'FileChangedShellPost',
     'guienter': 'GUIEnter',
     'insert_enter': 'InsertEnter',
-    'source_cmd': 'SourceCmd',
+
+# TODO: Figure out why soure_cmd breaks things
+#    'source_cmd': 'SourceCmd',
+
     'post_file_read': 'FileReadPost',
     'buf_win_leave': 'BufWinLeave',
     'insert_change': 'InsertChange',
