@@ -5,7 +5,11 @@ autocommands_map = {
     'cursor_moved_i': 'CursorMovedI',
     'pre_file_read': 'FileReadPre',
     'file_type': 'FileType',
-    'buf_write_cmd': 'BufWriteCmd',
+
+# TODO: Implement Cmd-events, which require that these actions are taken by Python
+# instead of Vim.
+#    'buf_write_cmd': 'BufWriteCmd',
+
     'pre_buf_read': 'BufReadPre',
     'term_response': 'TermResponse',
     'buf_new_fil': 'BufNewFile',
@@ -30,7 +34,8 @@ autocommands_map = {
     'guienter': 'GUIEnter',
     'insert_enter': 'InsertEnter',
 
-# TODO: Figure out why soure_cmd breaks things
+# TODO: Implement Cmd-events, which require that these actions are taken by Python
+# instead of Vim.
 #    'source_cmd': 'SourceCmd',
 
     'post_file_read': 'FileReadPost',
@@ -44,9 +49,16 @@ autocommands_map = {
     'cursor_hold': 'CursorHold',
     'func_undefined': 'FuncUndefined',
     'spell_file_missing': 'SpellFileMissing',
-    'pre_quick_fix_cmd': 'QuickFixCmdPre',
+
+# TODO: Implement Cmd-events, which require that these actions are taken by Python
+# instead of Vim.
+#    'pre_quick_fix_cmd': 'QuickFixCmdPre',
+
     'pre_filter_read': 'FilterReadPre',
-    'post_shell_cmd': 'ShellCmdPost',
+
+# TODO: Implement Cmd-events, which require that these actions are taken by Python
+# instead of Vim.
+#    'post_shell_cmd': 'ShellCmdPost',
     'cursor_moved': 'CursorMoved',
     'post_session_load': 'SessionLoadPost',
     'pre_filter_write': 'FilterWritePre',
@@ -56,15 +68,28 @@ autocommands_map = {
     'user': 'User',
     'color_scheme': 'ColorScheme',
     'cmdwin_enter': 'CmdwinEnter',
-    'file_append_cmd': 'FileAppendCmd',
-    'file_write_cmd': 'FileWriteCmd',
+
+# TODO: Implement Cmd-events, which require that these actions are taken by Python
+# instead of Vim.
+#    'file_append_cmd': 'FileAppendCmd',
+#    'file_write_cmd': 'FileWriteCmd',
+
     'post_filter_read': 'FilterReadPost',
-    'buf_read_cmd': 'BufReadCmd',
+
+# TODO: Implement Cmd-events, which require that these actions are taken by Python
+# instead of Vim.
+#    'buf_read_cmd': 'BufReadCmd',
+
     'buf_enter': 'BufEnter',
     'focus_gained': 'FocusGained',
-    'file_read_cmd': 'FileReadCmd',
+
+# TODO: Implement Cmd-events, which require that these actions are taken by Python
+# instead of Vim.
+#    'file_read_cmd': 'FileReadCmd',
+
     'pre_file_write': 'FileWritePre',
     'post_stdin_read': 'StdinReadPost',
+
     'syntax': 'Syntax',
     'cursor_hold_i': 'CursorHoldI',
     'vim_enter': 'VimEnter',
@@ -72,7 +97,11 @@ autocommands_map = {
     'post_buf_read': 'BufReadPost',
     'remote_reply': 'RemoteReply',
     'post_buf_file': 'BufFilePost',
-    'post_quick_fix_cmd': 'QuickFixCmdPost',
+
+# TODO: Implement Cmd-events, which require that these actions are taken by Python
+# instead of Vim.
+#    'post_quick_fix_cmd': 'QuickFixCmdPost',
+
     'encoding_changed': 'EncodingChanged',
     'swap_exists': 'SwapExists',
     'pre_file_append': 'FileAppendPre',
