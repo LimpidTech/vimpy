@@ -38,7 +38,7 @@ window = VariableWrapper(prefix='w:')
 tab = VariableWrapper(prefix='t:')
 buffer = VariableWrapper(prefix='b:')
 vim = VariableWrapper(prefix='v:')
-# TODO: Options
+options = VariableWrapper(prefix='&')
 registers = VariableWrapper(prefix='@')
 environment = VariableWrapper(prefix='$')
 
