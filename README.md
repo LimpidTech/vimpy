@@ -4,7 +4,7 @@ Vimpy
 Imagine you had a Vim module. Imagine Vimscript was a horrible excuse for a
 programming language... Actually, just imagine that first one.
 
-This project lets you use Python without any Vimscript. Seriously.
+This project lets you use Python to script vim without any Vimscript. Seriously.
 
 If your module is called *Cheese* and you put a Python package inside
 of it called cheese, then Vimpy will do the hard work for you - and
