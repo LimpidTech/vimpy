@@ -1,8 +1,8 @@
 Vimpy
 =====
 
-I don't understand. How do I use this?
---------------------------------------
+How do I use this?
+------------------
 
 Check out [the example plugin][ExamplePlugin] if
 you'd like to see an implementation of a plugin using Vimpy. All you have to
