@@ -5,7 +5,7 @@ Simply put, Vimpy allows you to write Vim plugins without writing any
 Vimscript. This is done by abstracting Vim commands through a Pythonic
 interface.
 
-How does it use this?
+How does it do this?
 ------------------
 
 Check out [the example plugin][ExamplePlugin] if
