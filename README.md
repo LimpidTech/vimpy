@@ -53,11 +53,11 @@ Vimpy also makes setting variables just as simple:
     from vimpy import variables
     variables.globals['example_data'] = 'Okay!'
 
-This allows you to change many Vim options as well as for plugins that
-don't provide a Pythonic interface. Other plugins can access these
-variables just as you would expect. For instance, you could check
-the value of the variable that we just set by simply executing
-`:echo g:example_data` from Vim's command mode.
+This allows you to change many Vim options - as well as options for
+plugins which don't provide a Pythonic interface. Other plugins can
+access these variables just as you would expect. For instance, you
+could check the value of the variable that we just set by simply
+executing `:echo g:example_data` from Vim's command mode.
 
 
 [ExamplePlugin]: https://github.com/LimpidTech/VimpyExample
