@@ -25,7 +25,7 @@ something similar to this at initialization of Vim:
     from vimpyexample.plugin import VimpyExamplePlugin
 
 All autocommands can be defined inside of the VimpyExamplePlugin as object
-methods with snake-case / Pythonic names. So, for instance - I could bind do
+methods with snake-case / Pythonic names. So, for instance - I could bind to
 VimEnter like so:
 
     from vimpy.plugins import Plugin
