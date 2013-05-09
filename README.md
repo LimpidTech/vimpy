@@ -2,7 +2,7 @@ Vimpy
 =====
 
 Simply put, Vimpy allows you to write Vim plugins without writing any
-Vimscript. This is done by abstracting Vim commands through a Pythoinc
+Vimscript. This is done by abstracting Vim commands through a Pythonic
 interface.
 
 How does it use this?
