@@ -19,10 +19,9 @@ module in VimplyExample called vimpyexample. It has a `plugin.py` (alongside
 it's `__init__.py`, of course), which defines a class called
 *VimpyExamplePlugin*.
 
-Since the bundle is called VimpyExample, Vimpy will automatically perform
-something similar to this at initialization of Vim:
+When Vim is initialized, Vimpy will automatically perform the following:
 
-    from vimpyexample.plugin import VimpyExamplePlugin
+    import vimpyexample
 
 All autocommands can be defined inside of the VimpyExamplePlugin as object
 methods with snake-case / Pythonic names. So, for instance - I could bind to
@@ -30,11 +29,21 @@ VimEnter like so:
 
     from vimpy.plugins import Plugin
 
-    class VimplyExamplePlugin(Plugin):
+    class VimpyExamplePlugin(Plugin):
         def vim_enter(self, data=None):
             print('Example VimEnter called.')
 
 *Note: This is what [the VimpyExample plugin][ExamplePlugin] does.*
+
+Vimpy observes the Plugin class, so all this package needs to do is
+instantiate a plugin object for it to start receiving autocommand events.
+If you'd prefer that your plugin doesn't automatically register for these
+events, you can define a Plugin like so:
+
+    from vimpy.plugins import Plugin
+    
+    class MyPlugin(Plugin):
+        auto_register = False
 
 Vimpy also exposes Vim's variables using a more Pythonic interface. For
 instance, you could do the following to see the key bound to mapleader
