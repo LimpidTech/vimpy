@@ -44,6 +44,11 @@ or you could do this to see the current buffer's syntax setting:
     from vimpy import variables
     print(variables.buffer['current_syntax'])
 
+Vimpy also makes setting variables just as simple:
+
+    from vimpy import variables
+    variables.globals['example_data'] = 'Okay!'
+
 Also
 ====
 
