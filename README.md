@@ -1,7 +1,11 @@
 Vimpy
 =====
 
-How do I use this?
+Simply put, Vimpy allows you to write Vim plugins without writing any
+Vimscript. This is done by abstracting Vim commands through a Pythonic
+interface.
+
+How does it do this?
 ------------------
 
 Check out [the example plugin][ExamplePlugin] if
@@ -44,10 +48,11 @@ or you could do this to see the current buffer's syntax setting:
     from vimpy import variables
     print(variables.buffer['current_syntax'])
 
-Also
-====
+Vimpy also makes setting variables just as simple:
 
-This README will get better when I have time to work on it.
+    from vimpy import variables
+    variables.globals['example_data'] = 'Okay!'
+    
 
 [ExamplePlugin]: https://github.com/LimpidTech/VimpyExample
 
