@@ -1,7 +1,11 @@
 Vimpy
 =====
 
-How do I use this?
+Simply put, Vimpy allows you to write Vim plugins without writing any
+Vimscript. This is done by abstracting Vim commands through a Pythoinc
+interface.
+
+How does it use this?
 ------------------
 
 Check out [the example plugin][ExamplePlugin] if
