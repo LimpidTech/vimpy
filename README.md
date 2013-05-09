@@ -52,11 +52,7 @@ Vimpy also makes setting variables just as simple:
 
     from vimpy import variables
     variables.globals['example_data'] = 'Okay!'
-
-Also
-====
-
-This README will get better when I have time to work on it.
+    
 
 [ExamplePlugin]: https://github.com/LimpidTech/VimpyExample
 
