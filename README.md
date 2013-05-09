@@ -36,7 +36,7 @@ VimEnter like so:
 
 *Note: This is what [the VimpyExample plugin][ExamplePlugin] does.*
 
-You can also access variables from Vim using a Pythonic interface. For
+Vimpy also exposes Vim's variables using a more Pythonic interface. For
 instance, you could do the following to see the key bound to mapleader
 if you were inclined to do so:
 
