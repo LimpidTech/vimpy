@@ -18,6 +18,12 @@ class VariableWrapper(object):
     def make_key(self, key):
         return '{0}{1}'.format(self.prefix, key)
 
+    def __contains__(self, key):
+        """ Allows us to check if a variable exists in this scope. """
+
+        command = 'exists("{0}")'.format(self.make_key(key))
+        return vim_module.eval(command) == '1'
+
     def __getitem__(self, key):
         """ Returns the value of a variable. """
 
