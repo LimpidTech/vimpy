@@ -50,6 +50,13 @@ class VariableWrapper(object):
 
         return itervalues_generator()
 
+    def remove(self, key):
+        vim_module.command('unlet {0}'.format(self.make_name(key)))
+
+    def clear(self):
+        for key in self.keys():
+            self.remove(key)
+
     def __contains__(self, key):
         """ Allows us to check if a variable exists in this scope. """
 
