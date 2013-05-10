@@ -44,8 +44,8 @@ else:
   ignored_modules = vim.eval('g:vimpy_ignored_modules').split(',')
   import_modules = []
 
-# Loop through every app in our pathogen bundle, and expose it's
-# plugin directory to Python.
+  # Loop through every app in our pathogen bundle, and expose it's
+  # plugin directory to Python.
   for filename in os.listdir(bundle_dir):
       if filename[0] == '.':
           continue
