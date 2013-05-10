@@ -42,6 +42,9 @@ class VariableWrapper(object):
 
         return itervalues_generator()
 
+    def values(self):
+        return list(self.itervalues())
+
     def remove(self, key):
         del self[key]
 
