@@ -13,19 +13,19 @@ class VariableWrapper(object):
     def __init__(self, prefix=''):
        self.prefix = prefix
 
-    def make_key(self, key):
+    def make_name(self, key):
         return '{0}{1}'.format(self.prefix, key)
 
     def __contains__(self, key):
         """ Allows us to check if a variable exists in this scope. """
 
-        command = 'exists("{0}")'.format(self.make_key(key))
+        command = 'exists("{0}")'.format(self.make_name(key))
         return vim_module.eval(command) == '1'
 
     def __getitem__(self, key):
         """ Returns the value of a variable. """
 
-        return vim_module.eval(self.make_key(key))
+        return vim_module.eval(self.make_name(key))
 
     def __setitem__(self, key, value):
         """ Modifies the value of the provided variable. """
@@ -35,7 +35,7 @@ class VariableWrapper(object):
         final_value = final_value.replace('\\', '\\\\')
         final_value = final_value.replace('"', '\\"')
 
-        variable = self.make_key(key)
+        variable = self.make_name(key)
 
         command = 'islocked("{0}")'.format(variable)
         is_locked = vim_module.eval(command)
@@ -43,7 +43,7 @@ class VariableWrapper(object):
         if int(is_locked) > 0:
             raise TypeError('Tried to alter {0} but it is locked.'.format(variable))
 
-        command = 'let {0}="{1}"'.format(self.make_key(key), final_value)
+        command = 'let {0}="{1}"'.format(self.make_name(key), final_value)
         return vim_module.command(command)
 
 globals = VariableWrapper(prefix='g:')
