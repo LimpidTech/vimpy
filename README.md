@@ -19,13 +19,12 @@ module in VimplyExample called vimpyexample. It has a `plugin.py` (alongside
 it's `__init__.py`, of course), which defines a class called
 *VimpyExamplePlugin*.
 
-Since the bundle is called VimpyExample, Vimpy will automatically perform
-something similar to this at initialization of Vim:
+When Vim is initialized, Vimpy will automatically perform the following:
 
-    from vimpyexample.plugin import VimpyExamplePlugin
+    import vimpyexample
 
 All autocommands can be defined inside of the VimpyExamplePlugin as object
-methods with snake-case / Pythonic names. So, for instance - I could bind do
+methods with snake-case / Pythonic names. So, for instance - I could bind to
 VimEnter like so:
 
     import vimpy
@@ -36,9 +35,19 @@ VimEnter like so:
 
 *Note: This is what [the VimpyExample plugin][ExamplePlugin] does.*
 
-You can also access variables from Vim using a Pythonic interface. For
-instance, you could do the following to see the key bound to mapleader if you
-were inclined to do so:
+Vimpy observes the Plugin class, so all this package needs to do is
+instantiate a plugin object for it to start receiving autocommand events.
+If you'd prefer that your plugin doesn't automatically register for these
+events, you can define a Plugin like so:
+
+    from vimpy.plugins import Plugin
+    
+    class MyPlugin(Plugin):
+        auto_register = False
+
+Vimpy also exposes Vim's variables using a more Pythonic interface. For
+instance, you could do the following to see the key bound to mapleader
+if you were inclined to do so:
 
     from vimpy import variables
     print(variables.globals['mapleader'])
@@ -52,7 +61,13 @@ Vimpy also makes setting variables just as simple:
 
     from vimpy import variables
     variables.globals['example_data'] = 'Okay!'
-    
+
+This allows you to change many Vim options - as well as options for
+plugins which don't provide a Pythonic interface. Other plugins can
+access these variables just as you would expect. For instance, you
+could check the value of the variable that we just set by simply
+executing `:echo g:example_data` from Vim's command mode.
+
 
 [ExamplePlugin]: https://github.com/LimpidTech/VimpyExample
 
