@@ -64,6 +64,9 @@ class VariableWrapper(object):
 
         return result
 
+    def __len__(self):
+        return len(self.keys())
+
     def __getitem__(self, key):
         """ Returns the value of a variable. """
 
