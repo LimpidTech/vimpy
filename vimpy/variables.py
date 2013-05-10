@@ -33,8 +33,6 @@ class VariableWrapper(object):
         raise StopIteration(stop_iter_message.format(self.prefix))
 
     def iteritems(self):
-        done_message = 'Done iterating items in {0}.'
-
         def iteritems_generator():
             for key in self:
                 yield key, self[key]
