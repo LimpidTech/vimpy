@@ -41,6 +41,15 @@ class VariableWrapper(object):
 
         return iteritems_generator()
 
+    def itervalues(self):
+        def itervalues_generator():
+            for key in self:
+                yield self[key]
+            
+            raise StopIteration(stop_iter_message.format(self.prefix))
+
+        return itervalues_generator()
+
     def __contains__(self, key):
         """ Allows us to check if a variable exists in this scope. """
 
