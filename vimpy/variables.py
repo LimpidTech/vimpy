@@ -91,6 +91,9 @@ class VariableWrapper(object):
 
         return value
 
+    def has_key(self, key):
+        return key in self
+
     def __len__(self):
         return len(self.keys())
 
