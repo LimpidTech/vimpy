@@ -23,6 +23,14 @@ class VariableWrapper(object):
         else:
             return vim_module.vars.keys()
 
+    def iterkeys(self):
+        keys = self.keys()
+
+        for key in keys:
+            yield key
+
+        raise StopIteration(stop_iter_message.format(self.prefix))
+
     def iteritems(self):
         def iteritems_generator():
             for key in self:
@@ -106,14 +114,6 @@ class VariableWrapper(object):
 
         command = 'exists("{0}")'.format(self.make_name(key))
         return vim_module.eval(command) == '1'
-
-    def iterkeys(self):
-        keys = self.keys()
-
-        for key in keys:
-            yield key
-
-        raise StopIteration(stop_iter_message.format(self.prefix))
 
     def __iter__(self):
         keys = self.keys()
