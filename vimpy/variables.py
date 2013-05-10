@@ -1,5 +1,7 @@
 import vim as vim_module
 
+stop_iter_message = 'Done iterating {0} variables.'
+
 class VariableWrapper(object):
     """ Provides a dict-like interface which can be used to access variables.
     
@@ -28,7 +30,18 @@ class VariableWrapper(object):
         for key in keys:
             yield key
 
-        raise StopIteration('Done iterating {0} variables.'.format(self.prefix))
+        raise StopIteration(stop_iter_message.format(self.prefix))
+
+    def iteritems(self):
+        done_message = 'Done iterating items in {0}.'
+
+        def iteritems_generator():
+            for key in self:
+                yield key, self[key]
+
+            raise StopIteration(stop_iter_message.format(self.prefix))
+
+        return iteritems_generator()
 
     def __contains__(self, key):
         """ Allows us to check if a variable exists in this scope. """
