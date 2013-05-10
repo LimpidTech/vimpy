@@ -1,7 +1,5 @@
 import vim as vim_module
 
-vim_setter_command = 'let {0}="{1}"'
-
 class VariableWrapper(object):
     """ Provides a dict-like interface which can be used to access variables.
     
@@ -37,7 +35,16 @@ class VariableWrapper(object):
         final_value = final_value.replace('\\', '\\\\')
         final_value = final_value.replace('"', '\\"')
 
-        vim_module.command(vim_setter_command.format(self.make_key(key), final_value))
+        variable = self.make_key(key)
+
+        command = 'islocked("{0}")'.format(variable)
+        is_locked = vim_module.eval(command)
+
+        if int(is_locked) > 0:
+            raise TypeError('Tried to alter {0} but it is locked.'.format(variable))
+
+        command = 'let {0}="{1}"'.format(self.make_key(key), final_value)
+        return vim_module.command(command)
 
 globals = VariableWrapper(prefix='g:')
 window = VariableWrapper(prefix='w:')
