@@ -8,11 +8,11 @@ interface.
 How does it do this?
 ------------------
 
-Check out [the example plugin][ExamplePlugin] if
-you'd like to see an implementation of a plugin using Vimpy. All you have to
-do is define a python package in your project with a lowercase version of
-the same name of the directory that your project's bundle is in, and Vimpy
-will automatically import it.
+Check out [the example plugin][ExamplePlugin] if you'd like to see an
+implementation of a plugin using Vimpy. All you have to do is define a python
+package in your project with a lowercase version of the same name of the
+directory that your project's bundle is in, and Vimpy will automatically import
+it.
 
 For instance, with [the VimpyExample plugin][ExamplePlugin] you end up with a
 module in VimplyExample called vimpyexample. It has a `plugin.py` (alongside
@@ -37,8 +37,8 @@ VimEnter like so:
 *Note: This is what [the VimpyExample plugin][ExamplePlugin] does.*
 
 You can also access variables from Vim using a Pythonic interface. For
-instance, you could do the following to see the key bound to mapleader
-if you were inclined to do so:
+instance, you could do the following to see the key bound to mapleader if you
+were inclined to do so:
 
     from vimpy import variables
     print(variables.globals['mapleader'])
