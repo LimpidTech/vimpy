@@ -94,6 +94,12 @@ class VariableWrapper(object):
 
         return value
 
+    def get(self, key, default):
+        if key in self:
+            return self[key]
+        else:
+            return default
+
     def has_key(self, key):
         return key in self
 
