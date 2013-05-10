@@ -64,6 +64,14 @@ class VariableWrapper(object):
 
         return value
 
+    def copy(self):
+        result = {}
+
+        for key, value in self.iteritems():
+            result[key] = value
+
+        return result
+
     def __contains__(self, key):
         """ Allows us to check if a variable exists in this scope. """
 
