@@ -57,6 +57,13 @@ class VariableWrapper(object):
         for key in self.keys():
             self.remove(key)
 
+    def pop(self, key):
+        value = vim_module.bindeval(format(self.make_name(key)))
+
+        self.remove(key)
+
+        return value
+
     def __contains__(self, key):
         """ Allows us to check if a variable exists in this scope. """
 
