@@ -11,7 +11,6 @@ class VariableWrapper(object):
 
     """
 
-    # TODO: Verify that the proper prefixes are working.
     def __init__(self, prefix=''):
        self.prefix = prefix
 
