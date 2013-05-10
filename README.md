@@ -28,9 +28,9 @@ All autocommands can be defined inside of the VimpyExamplePlugin as object
 methods with snake-case / Pythonic names. So, for instance - I could bind do
 VimEnter like so:
 
-    from vimpy.plugins import Plugin
+    import vimpy
 
-    class VimplyExamplePlugin(Plugin):
+    class VimplyExamplePlugin(vimpy.Plugin):
         def vim_enter(self, data=None):
             print('Example VimEnter called.')
 
