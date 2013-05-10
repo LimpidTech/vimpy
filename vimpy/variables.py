@@ -51,7 +51,7 @@ class VariableWrapper(object):
         return itervalues_generator()
 
     def remove(self, key):
-        vim_module.command('unlet {0}'.format(self.make_name(key)))
+        del self[key]
 
     def clear(self):
         for key in self.keys():
@@ -77,6 +77,9 @@ class VariableWrapper(object):
 
         command = 'exists("{0}")'.format(self.make_name(key))
         return vim_module.eval(command) == '1'
+
+    def __delitem__(self, key):
+        vim_module.command('unlet {0}'.format(self.make_name(key)))
 
     def __getitem__(self, key):
         """ Returns the value of a variable. """
