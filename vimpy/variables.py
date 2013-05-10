@@ -58,6 +58,11 @@ class VariableWrapper(object):
 
         return value
 
+    def popitem(self):
+        key = self.iterkeys().next()
+
+        return key, self.pop(key)
+
     def copy(self):
         result = {}
 
@@ -101,6 +106,14 @@ class VariableWrapper(object):
 
         command = 'exists("{0}")'.format(self.make_name(key))
         return vim_module.eval(command) == '1'
+
+    def iterkeys(self):
+        keys = self.keys()
+
+        for key in keys:
+            yield key
+
+        raise StopIteration(stop_iter_message.format(self.prefix))
 
     def __iter__(self):
         keys = self.keys()
