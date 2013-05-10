@@ -24,14 +24,6 @@ class VariableWrapper(object):
         else:
             return vim_module.vars.keys()
 
-    def __iter__(self):
-        keys = self.keys()
-
-        for key in keys:
-            yield key
-
-        raise StopIteration(stop_iter_message.format(self.prefix))
-
     def iteritems(self):
         def iteritems_generator():
             for key in self:
@@ -72,15 +64,6 @@ class VariableWrapper(object):
 
         return result
 
-    def __contains__(self, key):
-        """ Allows us to check if a variable exists in this scope. """
-
-        command = 'exists("{0}")'.format(self.make_name(key))
-        return vim_module.eval(command) == '1'
-
-    def __delitem__(self, key):
-        vim_module.command('unlet {0}'.format(self.make_name(key)))
-
     def __getitem__(self, key):
         """ Returns the value of a variable. """
 
@@ -104,6 +87,23 @@ class VariableWrapper(object):
 
         command = 'let {0}="{1}"'.format(self.make_name(key), final_value)
         return vim_module.command(command)
+
+    def __delitem__(self, key):
+        vim_module.command('unlet {0}'.format(self.make_name(key)))
+
+    def __contains__(self, key):
+        """ Allows us to check if a variable exists in this scope. """
+
+        command = 'exists("{0}")'.format(self.make_name(key))
+        return vim_module.eval(command) == '1'
+
+    def __iter__(self):
+        keys = self.keys()
+
+        for key in keys:
+            yield key
+
+        raise StopIteration(stop_iter_message.format(self.prefix))
 
 globals = VariableWrapper(prefix='g:')
 window = VariableWrapper(prefix='w:')
