@@ -83,6 +83,14 @@ class VariableWrapper(object):
         for key in basis:
             self[key] = basis[key]
 
+    def setdefault(self, key, value=None):
+        if key in self:
+            return self[key]
+
+        self[key] = value
+
+        return value
+
     def __len__(self):
         return len(self.keys())
 
