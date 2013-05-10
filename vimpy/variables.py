@@ -23,6 +23,9 @@ class VariableWrapper(object):
         else:
             return vim_module.vars.keys()
 
+    def items(self):
+        return list([(key, value) for key, value in self.iteritems()])
+
     def iterkeys(self):
         keys = self.keys()
 
