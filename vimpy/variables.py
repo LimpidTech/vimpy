@@ -79,6 +79,10 @@ class VariableWrapper(object):
 
         return result
 
+    def update(self, basis):
+        for key in basis:
+            self[key] = basis[key]
+
     def __len__(self):
         return len(self.keys())
 
