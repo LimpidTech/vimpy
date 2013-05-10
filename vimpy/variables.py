@@ -16,6 +16,20 @@ class VariableWrapper(object):
     def make_name(self, key):
         return '{0}{1}'.format(self.prefix, key)
 
+    def keys(self):
+        if not self.prefix in ['g:', 'v:', '']:
+            return vim_module.bindeval(self.prefix).keys()
+        else:
+            return vim_module.vars.keys()
+
+    def __iter__(self):
+        keys = self.keys()
+
+        for key in keys:
+            yield key
+
+        raise StopIteration('Done iterating {0} variables.'.format(self.prefix))
+
     def __contains__(self, key):
         """ Allows us to check if a variable exists in this scope. """
 
