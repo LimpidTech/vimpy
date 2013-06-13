@@ -65,5 +65,11 @@ else:
       if module not in ignored_modules:
           importlib.import_module(module)
 
+          for submodule in ['commands']:
+            try:
+              importlib.import_module('{0}.{1}'.format(module, submodule))
+            except ImportError:
+              pass
+
 EndPython
 
