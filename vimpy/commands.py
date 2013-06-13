@@ -18,14 +18,30 @@ command_register_template = (
 command_unregister_template = 'delcommand {name}'
 
 def call_command(name, args):
+    kwargs = dict()
+    found = False
+
+    def kwargs_filter(value):
+        try:
+            position = value.index('=')
+        except ValueError:
+            return True
+
+        key = value[:position]
+        value = value[position+1:]
+
+        kwargs[key] = value
+
+        return False
+
     if name in global_command_map:
-        varargs = shlex.split(args)
+        args = filter(kwargs_filter, shlex.split(args))
 
         # TODO: Allow other command maps
         command = global_command_map[name]
 
         try:
-            command(*varargs)
+            command(*args, **kwargs)
         except TypeError, e:
             vim.command('echoerr {0}'.format(e.message))
 
