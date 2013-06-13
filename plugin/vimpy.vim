@@ -65,7 +65,7 @@ else:
       if module not in ignored_modules:
           importlib.import_module(module)
 
-          for submodule in ['commands']:
+          for submodule in ['commands', 'plugin']:
             try:
               importlib.import_module('{0}.{1}'.format(module, submodule))
             except ImportError:
