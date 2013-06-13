@@ -1,6 +1,9 @@
 # TODO: Consider making this functionality a decorator instead # of the
 # __metaclass__ nightmare that it is.
 
+# TODO: Add support for type conversion. Every argument is a string
+# in the current code.
+
 import vim
 import shlex
 import inspect
