@@ -1,5 +1,5 @@
-Pathogen Required
-=================
+Bundler Required
+================
 
 In order to use Vimpy, you must first install Pathogen or
 Vundle. Vimpy must be installed within a bundle in order to
