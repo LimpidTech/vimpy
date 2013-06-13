@@ -1,5 +1,6 @@
 import vim
 from .autocommands import autocommands_map
+from .util import AutoInstance
 
 # TODO: Make this more cleanly
 observers = []
@@ -30,7 +31,7 @@ class PluginObserver(object):
 
     def __init__(self):
         """ Initializes a dict of events and their related listeners list.
-        
+
         Initializes self.listeners as a dict where keys are method names that
         are intended to respond to events. Each value is set to an empty list
         which contains all objects which are triggered by this event.
@@ -90,12 +91,16 @@ class PluginObserver(object):
                 if not listener in self.listeners[event]:
                     self.listeners[event].append(listener)
 
+# Instantiate a default observer for plugins that don't provide it explicitly
+default_observer = PluginObserver()
+
 class Plugin(object):
     """ Provides Pythonic event handling as an abstraction of Vim's events. """
 
+    __metaclass__ = AutoInstance
     auto_register = True
 
-    def __init__(self, observer=None): 
+    def __init__(self, observer=None):
         """ Sets up our plugin observer and registers to it if necessary. """
 
         if observer is None:
@@ -104,7 +109,4 @@ class Plugin(object):
         # Automatically register this object with the observer if necessary.
         if self.auto_register is True:
             observer.register(self)
-
-# Instantiate a default observer for plugins that don't provide it explicitly
-default_observer = PluginObserver()
 
