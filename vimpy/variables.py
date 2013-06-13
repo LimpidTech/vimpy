@@ -4,7 +4,7 @@ stop_iter_message = 'Done iterating {0} variables.'
 
 class VariableWrapper(object):
     """ Provides a dict-like interface which can be used to access variables.
-    
+
     Overrides __getitem__ and __setitem__ in order to allow developers to
     get and set the values of vimscript variables via a dict-like interface
     using the vimpy.settings['variable_name']
@@ -47,7 +47,7 @@ class VariableWrapper(object):
         def itervalues_generator():
             for key in self:
                 yield self[key]
-            
+
             raise StopIteration(stop_iter_message.format(self.prefix))
 
         return itervalues_generator()
@@ -148,6 +148,7 @@ class VariableWrapper(object):
         raise StopIteration(stop_iter_message.format(self.prefix))
 
 globals = VariableWrapper(prefix='g:')
+script = VariableWrapper(prefix='s:')
 window = VariableWrapper(prefix='w:')
 tab = VariableWrapper(prefix='t:')
 buffer = VariableWrapper(prefix='b:')
