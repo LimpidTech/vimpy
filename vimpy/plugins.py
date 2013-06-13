@@ -104,9 +104,9 @@ class Plugin(object):
         """ Sets up our plugin observer and registers to it if necessary. """
 
         if observer is None:
-            observer = default_observer
+            self.observer = default_observer
 
         # Automatically register this object with the observer if necessary.
         if self.auto_register is True:
-            observer.register(self)
+            self.observer.register(self)
 
