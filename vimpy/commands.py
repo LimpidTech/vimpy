@@ -4,7 +4,6 @@
 import vim
 import shlex
 import inspect
-from vimpy import variables
 from .util import AutoInstance
 
 command_register_template = (
