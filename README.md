@@ -5,7 +5,16 @@ Simply put, Vimpy allows you to write Vim plugins without writing any
 Vimscript. This is done by abstracting Vim commands through a Pythonic
 interface.
 
-How does it do this?
+Documentation
+-------------
+
+[Vimpy's documentation][wiki] is available at the [GitHub wiki page][wiki]. If
+you run into any problems with the documentation, or if you just have a
+recommendation on how to make it better - please don't hesitate to [create a
+new issue][issue]. We expect that Vimpy might have a couple issues, and will
+always want to make this library better in any way possible.
+
+Quick Start
 ------------------
 
 Check out [the example plugin][ExamplePlugin] if you'd like to see an
@@ -41,7 +50,7 @@ If you'd prefer that your plugin doesn't automatically register for these
 events, you can define a Plugin like so:
 
     from vimpy.plugins import Plugin
-    
+
     class MyPlugin(Plugin):
         auto_register = False
 
@@ -70,4 +79,6 @@ executing `:echo g:example_data` from Vim's command mode.
 
 
 [ExamplePlugin]: https://github.com/LimpidTech/VimpyExample
+[wiki]: https://github.com/LimpidTech/Vimpy/wiki
+[issue]: https://github.com/LimpidTech/Vimpy/issues/new
 
