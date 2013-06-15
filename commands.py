@@ -22,7 +22,6 @@ command_unregister_template = 'delcommand {name}'
 
 def call_command(name, args):
     kwargs = dict()
-    found = False
 
     def kwargs_filter(value):
         try:
