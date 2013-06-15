@@ -52,8 +52,6 @@ def call_command(name, args):
         # Get any kwargs.
         args = filter(kwargs_filter, args)
 
-        print(args)
-
         # TODO: Allow other command maps
         command = global_command_map[name]
 
