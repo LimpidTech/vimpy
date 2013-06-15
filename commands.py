@@ -4,7 +4,6 @@
 # TODO: Add support for type conversion. Every argument is a string
 # in the current code.
 
-import os
 import vim
 import shlex
 import inspect
