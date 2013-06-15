@@ -15,6 +15,7 @@ vim_unregister_command = template('unregister_command')
 
 arguments_split_expression = '((?:[^\s"\']|"[^"]*"|\'[^\']*\')+)'
 
+
 def call_command(name, args):
     args = re.split(arguments_split_expression, args)
 
