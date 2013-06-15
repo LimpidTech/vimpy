@@ -3,6 +3,7 @@ import sys
 import vim
 import importlib
 
+
 class Bootstrapper(object):
     packages = []
 
