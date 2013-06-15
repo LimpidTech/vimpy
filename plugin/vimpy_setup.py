@@ -69,7 +69,6 @@ class Bootstrapper(object):
     def setup_modules(self):
         """ Setup module paths. """
 
-        ignored_modules = self.get_ignored_modules()
         module_paths = self.get_module_paths()
 
         for path in module_paths:
@@ -84,8 +83,13 @@ class Bootstrapper(object):
     def initialize_modules(self):
         """ Initialize Vimpy modules. """
 
+        ignored_modules = self.get_ignored_modules()
+
         for package_name in self.packages:
             for module_name in self.modules:
+                if module_name in ignored_modules:
+                    continue
+
                 module_string = package_name + '.' + module_name
 
                 try:
