@@ -20,6 +20,7 @@ command_register_template = (
 
 command_unregister_template = 'delcommand {name}'
 
+
 def call_command(name, args):
     kwargs = dict()
 
@@ -46,6 +47,7 @@ def call_command(name, args):
             command(*args, **kwargs)
         except TypeError, e:
             vim.command('echoerr {0}'.format(e.message))
+
 
 class CommandMap(dict):
     def register(self, name, command):
@@ -108,6 +110,7 @@ class CommandMap(dict):
 
 # A default global command map
 global_command_map = CommandMap()
+
 
 class Command(object):
     """ A command which can be used inside Vim. """
