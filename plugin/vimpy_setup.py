@@ -28,11 +28,13 @@ class Bootstrapper(object):
 
     def get_runtime_paths(selfself):
         """ Gets Vim's runtime paths as a list. """
+
         paths = vim.bindeval('&rtp')
         return paths.split(',')
 
     def get_module_paths(self, paths=None):
         """ Iterates runtime paths and adds any Python modules to the list. """
+
         module_paths = []
 
         if paths is None:
@@ -65,6 +67,8 @@ class Bootstrapper(object):
         return module_paths
 
     def setup_modules(self):
+        """ Setup module paths. """
+
         ignored_modules = self.get_ignored_modules()
         module_paths = self.get_module_paths()
 
@@ -78,6 +82,8 @@ class Bootstrapper(object):
             self.packages.append(module_name)
 
     def initialize_modules(self):
+        """ Initialize Vimpy modules. """
+
         for package_name in self.packages:
             for module_name in self.modules:
                 module_string = package_name + '.' + module_name
