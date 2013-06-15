@@ -29,6 +29,7 @@ vim_call_command = template('call_command')
 vim_register_command = template('register_command')
 vim_unregister_command = template('unregister_command')
 
+
 def call_command(name, args):
     kwargs = dict()
 
