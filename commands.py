@@ -8,22 +8,7 @@ import os
 import vim
 import shlex
 import inspect
-from .util import AutoInstance
-
-file_path = os.path.dirname(__file__)
-
-
-def template(filename):
-    """ Returns the data from the provided template filename. """
-
-    handle = open(os.sep.join([
-        file_path,
-        'templates',
-        filename + '.vim'
-    ]), 'r')
-
-    return handle.read()
-
+from .util import AutoInstance, template
 
 vim_call_command = template('call_command')
 vim_register_command = template('register_command')
