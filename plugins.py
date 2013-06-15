@@ -2,7 +2,6 @@ import vim
 from .autocommands import autocommands_map
 from .util import AutoInstance, template
 
-# TODO: Make this more cleanly
 observers = []
 
 vim_observe_autocommand = template('observe_autocommand')
