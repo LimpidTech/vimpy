@@ -1,5 +1,5 @@
-# TODO: Consider making this functionality a decorator instead # of the
-# __metaclass__ nightmare that it is.
+# TODO: Consider making this functionality a decorator instead
+# of the __metaclass__ nightmare that it is.
 
 import vim
 import shlex
