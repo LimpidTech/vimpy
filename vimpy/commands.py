@@ -1,5 +1,5 @@
-# TODO: Consider making this functionality a decorator instead # of the
-# __metaclass__ nightmare that it is.
+# TODO: Consider making this functionality a decorator instead
+# of the __metaclass__ nightmare that it is.
 
 # TODO: Add support for type conversion. Every argument is a string
 # in the current code.
@@ -15,7 +15,7 @@ command_register_template = (
     '{completion} '
     '-nargs={arg_count} '
     '{name} '
-    'python vimpy_core_commands_call("{name}", "<args>")'
+    'python vimpy_core_commands_call("{name}", <q-args>)'
 )
 
 command_unregister_template = 'delcommand {name}'
