@@ -151,4 +151,3 @@ class Command(object):
 
 # Wraps our commands in Python calls.
 vim.command(vim_call_command)
-
