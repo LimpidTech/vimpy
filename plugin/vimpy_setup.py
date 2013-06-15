@@ -32,15 +32,12 @@ class Bootstrapper(object):
         paths = vim.bindeval('&rtp')
         return paths.split(',')
 
-    def get_module_paths(self, paths=None):
+    def get_module_paths(self):
         """ Iterates runtime paths and adds any Python modules to the list. """
 
         module_paths = []
 
-        if paths is None:
-            paths = self.get_runtime_paths()
-
-        for plugin_path in paths:
+        for plugin_path in self.get_runtime_paths():
             if not os.path.isdir(plugin_path):
                 continue
 
@@ -51,18 +48,14 @@ class Bootstrapper(object):
                 module_paths.append(plugin_path)
                 continue
 
-            # Allows deprecated support for old path format.
-            for filename in file_names:
-                package_path = os.sep.join([
-                    plugin_path,
-                    filename
-                ])
+            # Soon-to-be-deprecated support for the old organizational
+            # structure.
+            plugin_name = plugin_path.split(os.sep)[-1]
 
-                if os.path.isfile(package_path):
-                    continue
-
-                for module_path in self.get_module_paths(os.listdir(package_path)):
-                    module_paths.append(module_path)
+            if plugin_name.lower() in file_names:
+                module_paths.append(os.sep.join([
+                    plugin_path, plugin_name.lower()
+                ]))
 
         return module_paths
 
@@ -73,7 +66,7 @@ class Bootstrapper(object):
 
         for path in module_paths:
             module_path = os.path.dirname(path)
-            module_name = path[len(module_path):]
+            module_name = path[len(module_path)+1:]
 
             if module_path not in sys.path:
                 sys.path.append(module_path)
