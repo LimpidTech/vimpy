@@ -4,22 +4,30 @@
 # TODO: Add support for type conversion. Every argument is a string
 # in the current code.
 
+import os
 import vim
 import shlex
 import inspect
 from .util import AutoInstance
 
-command_register_template = (
-    'command '
-    '{bang} '
-    '{completion} '
-    '-nargs={arg_count} '
-    '{name} '
-    'python vimpy_core_commands_call("{name}", <q-args>)'
-)
+file_path = os.path.dirname(__file__)
 
-command_unregister_template = 'delcommand {name}'
 
+def template(filename):
+    """ Returns the data from the provided template filename. """
+
+    handle = open(os.sep.join([
+        file_path,
+        'templates',
+        filename + '.vim'
+    ]), 'r')
+
+    return handle.read()
+
+
+vim_call_command = template('call_command')
+vim_register_command = template('register_command')
+vim_unregister_command = template('unregister_command')
 
 def call_command(name, args):
     kwargs = dict()
@@ -82,16 +90,16 @@ class CommandMap(dict):
             'bang': bang
         }
 
-        register_command = command_register_template.format(**context)
+        command = vim_register_command.format(**context)
 
         # Register our command!
-        vim.command(register_command)
+        vim.command(command)
 
     def deregister(self, name):
         """ Deregister any command managed by this map. """
 
         if name in self:
-            vim.command(command_unregister_template.format(name=name))
+            vim.command(vim_unregister_command.format(name=name))
 
             return True
 
@@ -142,5 +150,5 @@ class Command(object):
         raise NotImplementedError('Can not call base VimpyCommand.')
 
 # Wraps our commands in Python calls.
-vim.command("python from vimpy.commands import call_command as vimpy_core_commands_call")
+vim.command(vim_call_command)
 
