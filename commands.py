@@ -4,8 +4,8 @@
 # TODO: Add support for type conversion. Every argument is a string
 # in the current code.
 
+import re
 import vim
-import shlex
 import inspect
 from .util import AutoInstance, template
 
@@ -13,8 +13,11 @@ vim_call_command = template('call_command')
 vim_register_command = template('register_command')
 vim_unregister_command = template('unregister_command')
 
+arguments_split_expression = '((?:[^\s"\']|"[^"]*"|\'[^\']*\')+)'
 
 def call_command(name, args):
+    args = re.split(arguments_split_expression, args)
+
     kwargs = dict()
 
     def kwargs_filter(value):
@@ -30,8 +33,26 @@ def call_command(name, args):
 
         return False
 
+    def remove_quotes(value):
+        """ When a variable is wrapped in quotes, remove them. """
+
+        if len(value) and (value[0] == '"' or value[0] == "'"):
+            if value[0] == value[-1]:
+                value = value[1:-1]
+
+        return value
+
     if name in global_command_map:
-        args = filter(kwargs_filter, shlex.split(args))
+        # Remove surrounding quotes when provided.
+        args = map(remove_quotes, args)
+
+        # Remove empty strings.
+        args = filter(None, args)
+
+        # Get any kwargs.
+        args = filter(kwargs_filter, args)
+
+        print(args)
 
         # TODO: Allow other command maps
         command = global_command_map[name]
