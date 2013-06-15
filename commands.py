@@ -4,25 +4,21 @@
 # TODO: Add support for type conversion. Every argument is a string
 # in the current code.
 
+import re
 import vim
-import shlex
 import inspect
-from .util import AutoInstance
+from .util import AutoInstance, template
 
-command_register_template = (
-    'command '
-    '{bang} '
-    '{completion} '
-    '-nargs={arg_count} '
-    '{name} '
-    'python vimpy_core_commands_call("{name}", <q-args>)'
-)
+vim_call_command = template('call_command')
+vim_register_command = template('register_command')
+vim_unregister_command = template('unregister_command')
 
-command_unregister_template = 'delcommand {name}'
+arguments_split_expression = '((?:[^\s"\']|"[^"]*"|\'[^\']*\')+)'
 
 def call_command(name, args):
+    args = re.split(arguments_split_expression, args)
+
     kwargs = dict()
-    found = False
 
     def kwargs_filter(value):
         try:
@@ -37,8 +33,24 @@ def call_command(name, args):
 
         return False
 
+    def remove_quotes(value):
+        """ When a variable is wrapped in quotes, remove them. """
+
+        if len(value) and (value[0] == '"' or value[0] == "'"):
+            if value[0] == value[-1]:
+                value = value[1:-1]
+
+        return value
+
     if name in global_command_map:
-        args = filter(kwargs_filter, shlex.split(args))
+        # Remove surrounding quotes when provided.
+        args = map(remove_quotes, args)
+
+        # Remove empty strings.
+        args = filter(None, args)
+
+        # Get any kwargs.
+        args = filter(kwargs_filter, args)
 
         # TODO: Allow other command maps
         command = global_command_map[name]
@@ -47,6 +59,7 @@ def call_command(name, args):
             command(*args, **kwargs)
         except TypeError, e:
             vim.command('echoerr {0}'.format(e.message))
+
 
 class CommandMap(dict):
     def register(self, name, command):
@@ -81,16 +94,16 @@ class CommandMap(dict):
             'bang': bang
         }
 
-        register_command = command_register_template.format(**context)
+        command = vim_register_command.format(**context)
 
         # Register our command!
-        vim.command(register_command)
+        vim.command(command)
 
     def deregister(self, name):
         """ Deregister any command managed by this map. """
 
         if name in self:
-            vim.command(command_unregister_template.format(name=name))
+            vim.command(vim_unregister_command.format(name=name))
 
             return True
 
@@ -109,6 +122,7 @@ class CommandMap(dict):
 
 # A default global command map
 global_command_map = CommandMap()
+
 
 class Command(object):
     """ A command which can be used inside Vim. """
@@ -140,5 +154,4 @@ class Command(object):
         raise NotImplementedError('Can not call base VimpyCommand.')
 
 # Wraps our commands in Python calls.
-vim.command("python from vimpy.commands import call_command as vimpy_core_commands_call")
-
+vim.command(vim_call_command)

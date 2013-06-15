@@ -1,0 +1,1 @@
+delcommand {name}
