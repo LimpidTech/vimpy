@@ -61,9 +61,19 @@ else:
               sys.path = [abs_filename] + sys.path
               import_modules.append(module_dirname)
 
-  for module in import_modules:
-      if module not in ignored_modules:
-          importlib.import_module(module)
+  for package in import_modules:
+      if package not in ignored_modules:
+          if package == 'vimpy':
+              continue
+
+          importlib.import_module(package)
+
+          for subpackage in ['commands', 'plugin']:
+              try:
+                  importlib.import_module('{0}.{1}'.format(package, subpackage))
+
+              except ImportError:
+                  pass
 
 EndPython
 
