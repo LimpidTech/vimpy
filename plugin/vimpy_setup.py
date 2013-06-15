@@ -8,7 +8,7 @@ class Bootstrapper(object):
     packages = []
 
     modules = [
-        'command',
+        'commands',
         'plugin',
     ]
 
