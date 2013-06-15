@@ -1,1 +1,1 @@
-python from vimpy.commands import router as vimpy_core_commands_call
+python from vimpy.commands import call_command as vimpy_core_commands_call
