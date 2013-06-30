@@ -9,7 +9,7 @@ endif
 let g:loaded_vimpy=1
 
 if !exists("g:vimpy_ignored_modules")
-	let g:vimpy_ignored_modules="a,b,c,d"
+	let g:vimpy_ignored_modules=""
 endif
 
 let s:vimpy_script_filename=expand("<sfile>")
