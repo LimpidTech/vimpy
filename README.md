@@ -1,4 +1,4 @@
-[![Stories in Ready](http://badge.waffle.io/LimpidTech/Vimpy.png)](http://waffle.io/LimpidTech/Vimpy)  
+[![Stories in Ready](https://badge.waffle.io/LimpidTech/Vimpy.png)](http://waffle.io/LimpidTech/Vimpy)  
 Vimpy
 =====
 
