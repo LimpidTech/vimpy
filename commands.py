@@ -16,7 +16,7 @@ vim_unregister_command = template('unregister_command')
 arguments_split_expression = '((?:[^\s"\']|"[^"]*"|\'[^\']*\')+)'
 
 
-def call_command(name, args):
+def call_command(name, line1, line2, args):
     args = re.split(arguments_split_expression, args)
 
     kwargs = dict()
@@ -56,6 +56,10 @@ def call_command(name, args):
         # TODO: Allow other command maps
         command = global_command_map[name]
 
+        if getattr(command, 'range', False):
+            kwargs['line1'] = line1
+            kwargs['line2'] = line2
+
         try:
             command(*args, **kwargs)
         except TypeError, e:
@@ -69,6 +73,8 @@ class CommandMap(dict):
         inspection = inspect.getargspec(command.run)
 
         arg_count = len(inspection.args) - 1
+        if arg_count > 1:
+            arg_count = '*'
 
         # Provide support for argument expansion
         if inspection.varargs is not None:
@@ -88,11 +94,17 @@ class CommandMap(dict):
         else:
             bang = ''
 
+        if getattr(command, 'range', False):
+            range_str = '-range'
+        else:
+            range_str = ''
+
         context = {
             'name': name,
             'arg_count': arg_count,
             'completion': completion,
-            'bang': bang
+            'bang': bang,
+            'range': range_str,
         }
 
         command = vim_register_command.format(**context)
